@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="zhongqiu.bean">
+    <class name="Person" table="person">
+        <!--二级缓存的配置  -->
+        <!--二级缓存是session间共享的，适用于对象数据频繁共享，数据变化频率低。
+            read-only是只读型，缓存不更新，适用于不发生改变的数据，效率最高，事务隔离级别最低，
+            read-write读写型，缓存在数据变化时触发更新，适用于变化的数据，
+            nonstrict-read-write不严格读写型，缓存不定期更新，适用于变化频率低的数据，
+            transactional事务型，缓存在数据变化时更新，并且支持事务，效率最低，事务隔离级别最高。  -->
+    	<cache usage="read-write" region="zhongqiu.bean.Person"/>
+    	
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <property name="name" length="225" not-null="true"/>
+    </class>
+</hibernate-mapping>
